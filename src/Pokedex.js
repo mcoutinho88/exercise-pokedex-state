@@ -34,40 +34,28 @@ export class Pokedex extends Component {
         index: 0,
       }));
     }
-    
   }
 
   render() {
     const pokemonByType = data.filter((poke) => poke.type === this.state.type);
-    const getAllTypes = data.map(pokemon => pokemon.type);
+    const getAllTypes = data.map((pokemon) => pokemon.type);
     const uniqueTypes = [...new Set(getAllTypes)];
-    console.log(uniqueTypes)
     return (
       <>
         <h1 className="title">Pokedex</h1>
         <div className="pokemon-container">
-          {pokemonByType.map((pokemon) => (
-            <Pokemon data={pokemon} key={pokemon.id} />
-          ))[this.state.index]}
+          {
+            pokemonByType.map((pokemon) => (
+              <Pokemon data={pokemon} key={pokemon.id} />
+            ))[this.state.index]
+          }
         </div>
         <div className="select-type">
-          <button onClick={() => this.handleClickByType('Electric')}>
-            Electric
-          </button>
-          <button onClick={() => this.handleClickByType('Fire')}>Fire</button>
-          <button onClick={() => this.handleClickByType('Bug')}>Bug</button>
-          <button onClick={() => this.handleClickByType('Poison')}>
-            Poison
-          </button>
-          <button onClick={() => this.handleClickByType('Psychic')}>
-            Psychic
-          </button>
-          <button onClick={() => this.handleClickByType('Normal')}>
-            Normal
-          </button>
-          <button onClick={() => this.handleClickByType('Dragon')}>
-            Dragon
-          </button>
+          {uniqueTypes.map((type) => (
+            <button key={type} onClick={() => this.handleClickByType(type)}>
+              {type}
+            </button>
+          ))}
         </div>
         <div className="next-poke">
           <button onClick={this.handlePokemon}>Next Pokemon</button>
