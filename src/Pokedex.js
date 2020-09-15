@@ -9,36 +9,68 @@ export class Pokedex extends Component {
 
     this.state = {
       type: 'Electric',
+      index: 0,
     };
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClickByType = this.handleClickByType.bind(this);
+    this.handlePokemon = this.handlePokemon.bind(this);
   }
 
-  handleClick(type) {
+  handleClickByType(type) {
     this.setState((state) => ({
-      type
-    }))
+      type,
+      index: 0,
+    }));
+  }
+
+  handlePokemon() {
+    const pokemonByType = data.filter((poke) => poke.type === this.state.type);
+    if (pokemonByType.length - 1 !== this.state.index) {
+      this.setState((state) => ({
+        index: state.index + 1,
+      }));
+    } else {
+      this.setState((state) => ({
+        index: 0,
+      }));
+    }
+    
   }
 
   render() {
+    const pokemonByType = data.filter((poke) => poke.type === this.state.type);
+    const getAllTypes = data.map(pokemon => pokemon.type);
+    const uniqueTypes = [...new Set(getAllTypes)];
+    console.log(uniqueTypes)
     return (
       <>
         <h1 className="title">Pokedex</h1>
         <div className="pokemon-container">
-          {data
-            .filter((poke) => poke.type === this.state.type)
-            .map((pokemon, index) => (
-              <Pokemon data={pokemon} key={pokemon.id} />
-            ))}
+          {pokemonByType.map((pokemon) => (
+            <Pokemon data={pokemon} key={pokemon.id} />
+          ))[this.state.index]}
         </div>
-        <div className="buttons">
-          <button onClick={() => this.handleClick('Electric')}>Electric</button> 
-          <button onClick={() => this.handleClick('Fire')}>Fire</button> 
-          <button onClick={() => this.handleClick('Bug')}>Bug</button> 
-          <button onClick={() => this.handleClick('Poison')}>Poison</button> 
-          <button onClick={() => this.handleClick('Psychic')}>Psychic</button> 
-          <button onClick={() => this.handleClick('Normal')}>Normal</button> 
-          <button onClick={() => this.handleClick('Dragon')}>Dragon</button> 
+        <div className="select-type">
+          <button onClick={() => this.handleClickByType('Electric')}>
+            Electric
+          </button>
+          <button onClick={() => this.handleClickByType('Fire')}>Fire</button>
+          <button onClick={() => this.handleClickByType('Bug')}>Bug</button>
+          <button onClick={() => this.handleClickByType('Poison')}>
+            Poison
+          </button>
+          <button onClick={() => this.handleClickByType('Psychic')}>
+            Psychic
+          </button>
+          <button onClick={() => this.handleClickByType('Normal')}>
+            Normal
+          </button>
+          <button onClick={() => this.handleClickByType('Dragon')}>
+            Dragon
+          </button>
+        </div>
+        <div className="next-poke">
+          <button onClick={this.handlePokemon}>Next Pokemon</button>
         </div>
       </>
     );
