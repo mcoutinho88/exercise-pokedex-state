@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Pokemon from './Pokemon';
-import Button from './Button';
 
 import data from './data';
 
