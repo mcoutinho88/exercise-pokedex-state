@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   text-decoration: none;
   width: 60%;
+  background-color: rgba(236, 116, 86, 0.651);
 }
 
 .title {
@@ -28,6 +29,7 @@ body {
   justify-content: center;
   width: 320px;
   margin-bottom: 32px;
+  background-color: rgb(186, 240, 226);
 }
 
 .container .details {
@@ -90,7 +92,7 @@ body {
 }
 
 .next-poke button {
-  background-color: #c78051;
+  background-color: #5188c7;
   width: 100px;
   font-weight: bold;
   font-size: 14px;
